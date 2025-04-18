@@ -21,6 +21,7 @@ const createSvg = (_config = config) => {
   const stagePath = document.createElementNS(SVG_NS, "path");
   stagePath.setAttribute("d", generateOverlayPath(_config));
   stagePath.style.fill = "red";
+  stagePath.style.opacity = "0.7";
   svg.append(stagePath);
 
   return svg;
