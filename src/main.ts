@@ -11,25 +11,17 @@ const generateHighlight = (
   y: number,
   width: number,
   height: number,
-  padding: number
+  padding: number,
 ) => {
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
   const _padding = Math.max(padding, 0);
   return `M0,0 H${windowWidth} V${windowHeight} H0 V0 Z M${x - _padding},${
     y - _padding
-  } H${x + width + _padding} V${y + height + _padding} H${x - _padding} V${
-    y - _padding
-  } z`;
+  } H${x + width + _padding} V${y + height + _padding} H${x - _padding} V${y - _padding} z`;
 };
 
-const createSvg = (
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  padding: number
-) => {
+const createSvg = (x: number, y: number, width: number, height: number, padding: number) => {
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
   const svg = document.createElementNS(SVG_NS, "svg");
@@ -46,10 +38,7 @@ const createSvg = (
   svg.style.opacity = "0.7";
 
   const highlightPath = document.createElementNS(SVG_NS, "path");
-  highlightPath.setAttribute(
-    "d",
-    generateHighlight(x, y, width, height, padding)
-  );
+  highlightPath.setAttribute("d", generateHighlight(x, y, width, height, padding));
 
   highlightPath.style.pointerEvents = "auto";
   highlightPath.style.cursor = "auto";
