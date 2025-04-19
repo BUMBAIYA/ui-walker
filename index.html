@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>ui-walker.js</title>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ui-walker.js</title>
-    <style>
-      *,
-      *::after,
-      *::before {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-    </style>
+    <link rel="stylesheet" href="./src/styles/main.css" />
   </head>
   <body>
+    <div id="app" class="h-full">
+      <div class="w-full h-full p-10">
+        <div class="grid grid-cols-12 gap-10">
+          <div class="col-span-12 min-h-40 bg-gray-200"></div>
+          <div class="col-span-4 min-h-40 bg-gray-200"></div>
+          <div
+            class="col-span-4 min-h-40 bg-gray-200 flex items-center justify-center"
+          >
+            <button id="click" class="cursor-pointer border p-1.5">
+              Click through highlight
+            </button>
+          </div>
+          <div class="col-span-4 min-h-40 bg-gray-200"></div>
+          <div class="col-span-8 min-h-40 bg-gray-200"></div>
+          <div class="col-span-4 min-h-40 bg-gray-200"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
