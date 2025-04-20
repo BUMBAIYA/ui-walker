@@ -34,7 +34,7 @@ const createSvg = (x: number, y: number, width: number, height: number, padding:
   svg.style.clipRule = "evenodd";
   svg.style.pointerEvents = "none";
 
-  svg.style.fill = "rgb(256,100,0)";
+  svg.style.fill = "rgb(0,0,0)";
   svg.style.opacity = "0.7";
 
   const highlightPath = document.createElementNS(SVG_NS, "path");
@@ -56,7 +56,7 @@ const init = () => {
   const elementToHighlight = document.getElementById("element-to-highlight")!;
   const { width, height } = elementToHighlight.getBoundingClientRect();
 
-  const PADDING = 10;
+  const PADDING = 5;
   const WIDTH = width + 2 * PADDING;
   const HEIGHT = height + 2 * PADDING;
 
@@ -65,7 +65,7 @@ const init = () => {
     elementToHighlight.offsetTop - PADDING,
     WIDTH,
     HEIGHT,
-    10,
+    PADDING,
   );
 
   app.append(uiWalkerState.overlay);
@@ -90,7 +90,7 @@ window.addEventListener("resize", () => {
     const elementToHighlight = document.getElementById("element-to-highlight")!;
     const { width, height } = elementToHighlight.getBoundingClientRect();
 
-    const PADDING = 10;
+    const PADDING = 5;
     const WIDTH = width + 2 * PADDING;
     const HEIGHT = height + 2 * PADDING;
 
@@ -101,7 +101,7 @@ window.addEventListener("resize", () => {
         elementToHighlight.offsetTop - PADDING,
         WIDTH,
         HEIGHT,
-        10,
+        PADDING,
       ),
     );
   }
