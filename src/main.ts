@@ -47,7 +47,59 @@ const createSvg = (x: number, y: number, width: number, height: number, padding:
   return svg;
 };
 
-const WIDTH = 300;
-const HEIGHT = 300;
+var uiWalkerState: { overlay: null | SVGSVGElement } = {
+  overlay: null,
+};
 
-app.append(createSvg(window.innerWidth / 2 - WIDTH / 2, 150, WIDTH, HEIGHT, 5));
+const init = () => {
+  const elementToHighlight = document.getElementById("element-to-highlight")!;
+  const { width, height } = elementToHighlight.getBoundingClientRect();
+
+  const PADDING = 10;
+  const WIDTH = width + 2 * PADDING;
+  const HEIGHT = height + 2 * PADDING;
+
+  uiWalkerState.overlay = createSvg(
+    elementToHighlight.offsetLeft - PADDING,
+    elementToHighlight.offsetTop - PADDING,
+    WIDTH,
+    HEIGHT,
+    10,
+  );
+
+  app.append(uiWalkerState.overlay);
+};
+
+init();
+
+window.addEventListener("resize", () => {
+  const windowX = window.innerWidth;
+  const windowY = window.innerHeight;
+
+  if (uiWalkerState.overlay) {
+    uiWalkerState.overlay.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
+
+    const pathElement = uiWalkerState.overlay.firstElementChild as SVGPathElement | null;
+    if (pathElement?.tagName !== "path") {
+      throw new Error("no path element found in stage svg");
+    }
+
+    const elementToHighlight = document.getElementById("element-to-highlight")!;
+    const { width, height } = elementToHighlight.getBoundingClientRect();
+
+    const PADDING = 10;
+    const WIDTH = width + 2 * PADDING;
+    const HEIGHT = height + 2 * PADDING;
+
+    pathElement.setAttribute(
+      "d",
+      generateHighlight(
+        elementToHighlight.offsetLeft - PADDING,
+        elementToHighlight.offsetTop - PADDING,
+        WIDTH,
+        HEIGHT,
+        10,
+      ),
+    );
+  }
+});
