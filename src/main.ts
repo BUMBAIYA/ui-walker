@@ -38,6 +38,7 @@ const createSvg = (x: number, y: number, width: number, height: number, padding:
   svg.style.opacity = "0.7";
 
   const highlightPath = document.createElementNS(SVG_NS, "path");
+  highlightPath.setAttribute("id", "__ui-walker-svg-overlay-path");
   highlightPath.setAttribute("d", generateHighlight(x, y, width, height, padding));
 
   highlightPath.style.pointerEvents = "auto";
@@ -79,7 +80,9 @@ window.addEventListener("resize", () => {
   if (uiWalkerState.overlay) {
     uiWalkerState.overlay.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
 
-    const pathElement = uiWalkerState.overlay.firstElementChild as SVGPathElement | null;
+    const pathElement = uiWalkerState.overlay.getElementById(
+      "__ui-walker-svg-overlay-path",
+    ) as SVGPathElement | null;
     if (pathElement?.tagName !== "path") {
       throw new Error("no path element found in stage svg");
     }
